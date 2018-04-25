@@ -34,8 +34,8 @@ public class NombreMystere {
             chooseLvl = level.chooseLvl();
 
             //générer un nombre mystère + exception. How to correct an exception ?
+            Dice dice = new Dice();
             try {
-                Dice dice = new Dice();
                 mysteryNumber = dice.rollDice(level.min, level.max);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
