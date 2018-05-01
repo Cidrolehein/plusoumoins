@@ -9,62 +9,36 @@ public class NombreMystere {
 
     static int mysteryNumber;
     static int playerInput;
+    static int max;
+    static int min;
     static Scanner scan;
     static Scanner sc;
-    static Scanner lvl;
     static String result;
-    static int chooseLvl;
-    static int round = 1;
+    static char retry = 'O';
+    static int round;
 
     public static void main(String[] args) {
 
-        //récupérer l'input du joueur
         scan = new Scanner(System.in);
-        sc = new Scanner(System.in);
-        lvl = new Scanner(System.in);
+        sc = new Scanner(System.in); // !!! initiate a new char Scanner
+        GamePlay gameplay = new GamePlay();
 
-        playAgain playagain = new playAgain();
-        Compare compare = new Compare();
+        // More play && level difficulty (boolean)
 
-        while ( && playagain.getRetry() == 'O') {
+        while (retry == 'O') {
+            mysteryNumber = gameplay.chooseLevel(max, min);
 
-            // Define level : + round max number is game over ? >> boolean
+                System.out.println(mysteryNumber); // debug
 
-            System.out.println("Salut, bienvenue dans le jeu du Plus et Moins ! \n Choisi un niveau : \n Choix 1 : Facile \n Choix 2 : Difficile \n Choix 3 : Extreme !");
-            Level level = new Level();
-            chooseLvl = level.chooseLvl();
-
-            //générer un nombre mystère + exception. How to correct an exception ?
-            Dice dice = new Dice();
-            try {
-                mysteryNumber = dice.rollDice(level.min, level.max);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-
-                //debug
-                System.out.println(mysteryNumber);
-
+            do {
+                round = 0;
             playerInput = scan.nextInt();
-
-            result = compare.compareNumbers(mysteryNumber, playerInput);
+            result = gameplay.compareNumbers(mysteryNumber, playerInput);
             System.out.println("" + result);
+            round++;} while (mysteryNumber != playerInput);
 
-                while (mysteryNumber != playerInput) {
-
-                    playerInput = scan.nextInt();
-
-                    result = compare.compareNumbers(mysteryNumber, playerInput);
-                    System.out.println("" + result);
-                    round++;
-
-                }
-
-                System.out.println("Bravo, tu as trouvé en " + round + " coups !\n\nRéessayer O / N ?");
-                char r = sc.nextLine().charAt(0);
-                playagain.setRetry(r);
+                retry = gameplay.retry();
 
         }
     }
-
 }
