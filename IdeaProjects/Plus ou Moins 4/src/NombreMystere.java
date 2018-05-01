@@ -7,14 +7,14 @@ public class NombreMystere {
 
     // !!!! pb avec les variables statics
 
-    static int mysteryNumber = 0;
+    static int mysteryNumber;
     static int playerInput;
     static Scanner scan;
     static Scanner sc;
     static Scanner lvl;
     static String result;
     static int chooseLvl;
-    static int round;
+    static int round = 1;
 
     public static void main(String[] args) {
 
@@ -24,10 +24,11 @@ public class NombreMystere {
         lvl = new Scanner(System.in);
 
         playAgain playagain = new playAgain();
+        Compare compare = new Compare();
 
-        while (playagain.getRetry() == 'O') {
+        while ( && playagain.getRetry() == 'O') {
 
-            // Define level :
+            // Define level : + round max number is game over ? >> boolean
 
             System.out.println("Salut, bienvenue dans le jeu du Plus et Moins ! \n Choisi un niveau : \n Choix 1 : Facile \n Choix 2 : Difficile \n Choix 3 : Extreme !");
             Level level = new Level();
@@ -44,10 +45,16 @@ public class NombreMystere {
                 //debug
                 System.out.println(mysteryNumber);
 
+            playerInput = scan.nextInt();
+
+            result = compare.compareNumbers(mysteryNumber, playerInput);
+            System.out.println("" + result);
+
                 while (mysteryNumber != playerInput) {
 
-                    Compare compare = new Compare();
-                    result = compare.compareNumbers(mysteryNumber);
+                    playerInput = scan.nextInt();
+
+                    result = compare.compareNumbers(mysteryNumber, playerInput);
                     System.out.println("" + result);
                     round++;
 
