@@ -1,11 +1,6 @@
 import java.util.Scanner;
 
-/**
- * @author c4n4r
- */
 public class NombreMystere {
-
-    // !!!! pb avec les variables statics
 
     static int mysteryNumber;
     static int playerInput;
@@ -25,19 +20,18 @@ public class NombreMystere {
 
         // More play && level difficulty (boolean)
 
-        while (retry == 'O') {
+        while (retry == 'O' && round <= 10) {
             mysteryNumber = gameplay.chooseLevel(max, min);
 
                 System.out.println(mysteryNumber); // debug
 
-            do {
-                round = 0;
-            playerInput = scan.nextInt();
-            result = gameplay.compareNumbers(mysteryNumber, playerInput);
-            System.out.println("" + result);
-            round++;} while (mysteryNumber != playerInput);
-
+                do {
+                    playerInput = scan.nextInt();
+                    result = gameplay.compareNumbers(mysteryNumber, playerInput);
+                    System.out.println("" + result);
+                } while (mysteryNumber != playerInput && round++ < 10);
                 retry = gameplay.retry();
+                round = 0;
 
         }
     }
