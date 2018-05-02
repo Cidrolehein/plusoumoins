@@ -27,15 +27,12 @@ public class GamePlay {
     // Compare numbers
 
     public String compareNumbers (int numberMystery, int playerInput){
-
-        if (playerInput > numberMystery) {
-            str = "C'est moins ! Nouvel essai :";
-            return str;
-        }
-        else { if (playerInput < numberMystery)
-            str = "C'est plus ! Nouvel essai :";
-            return str;
-        }
+            if (playerInput > numberMystery) {
+                str = "C'est moins ! Il te reste " + (10 - NombreMystere.round) + " coups. Nouvel essai :";
+            } else {
+                if (playerInput < numberMystery)
+                    str = "C'est plus ! Il te reste " + (10 - NombreMystere.round) + " coups.  Nouvel essai :";}
+        return str;
     }
 
     // Retry
